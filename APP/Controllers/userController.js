@@ -62,6 +62,7 @@ class UserController {
     static userLogin = async (req, res) => {
         try {
             const { email, password } = req.body;
+            const user = await userModel.findOne({ email: email});
             const comparePass = await bcrypt.compare(password, user.password);
             if ((user.email === email) && comparePass) {
                 // Generate JWT
